@@ -1,0 +1,21 @@
+html {
+    background-image: url("Невероятные-фотографии-Земли-взгляд-из-космоса-подборка-2.jpg");
+    background-size: 100%;
+}
+
+div {
+    position: absolute;
+    left: 100px;
+    top: 250px;
+}
+
+input, button {
+    border-radius: 25px;
+    font-size: 12pt;
+    padding-left: 5px;
+    outline: 0;
+}
+
+p {
+    color: red;
+}

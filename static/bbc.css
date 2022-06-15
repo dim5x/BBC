@@ -1,0 +1,77 @@
+html {
+    background-image: url("backgrounds-html-1511629460.jpg");
+}
+
+.basediv {
+    border: black solid 1px;
+    border-radius: 25px;
+    height: 49%;
+}
+
+h2 {
+    color: #dcd0d0;
+}
+
+table {
+    border: solid 1px black;
+    border-collapse: collapse;
+    border-radius: 25px;
+    overflow: hidden;
+    width: 100%;
+}
+
+th {
+    border: solid 1px;
+    background-color: #AB6B48;
+    color: black;
+    text-align: center;
+}
+
+
+.last_td {
+    padding: 0;
+    width: 30px;
+}
+
+td {
+    border: solid 1px;
+    padding-left: 10px;
+}
+
+tr {
+    background-color: #dbaf8a;
+    color: black;
+    /*padding-left: 10px;*/
+}
+
+
+tbody tr:hover {
+    background-color: rgba(205, 144, 144, 0.19);
+    color: #e8cfcf;
+    /*font-size: 1.5em;*/
+}
+
+
+.delete_button {
+    background-color: #AB6B48;
+    text-align: center;
+    width: 100%;
+}
+
+#send_button {
+    border-radius: 25px;
+    font-size: 12pt;
+}
+
+textarea {
+    background-color: rgba(255, 255, 255, 0.3);
+    border-radius: 25px;
+    color: black;
+    height: 50%;
+    width: 50%;
+}
+
+::placeholder {
+    color: black;
+    font-size: 12pt;
+}

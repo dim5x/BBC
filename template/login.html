@@ -13,7 +13,14 @@
         <input type="text" name="login" placeholder="&nbsp;Имя" autofocus required autocomplete="off"> <br><br>
         <input type='password' name="password" placeholder="&nbsp;Пароль" required autocomplete="off"> <br><br>
         <button type="submit" name="button">Отправить</button>
-        <p>{{ message }}</p>
+
+{#        {% with messages = get_flashed_messages() %}#}
+{#            {% if messages %}#}
+{#                {% for message in messages %}#}
+{#                    <p>{{ message }}</p>#}
+{#                {% endfor %}#}
+{#            {% endif %}#}
+{#        {% endwith %}#}
     </div>
 
 </form>

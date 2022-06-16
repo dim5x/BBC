@@ -28,20 +28,20 @@ def login():
     if request.method == 'POST':
         login = request.form['login']
         password = request.form['password']
-        print(f'{login=}', f'{password=}')
         password_hash = hashlib.sha3_384(bytes(password, encoding='UTF-8')).hexdigest()
-        print(password_hash)
         if password_hash == PASSWORD_HASH and login == 'Daisy':
             session[login] = login
             return redirect('/bbc')
         else:
-            return render_template('login.html', message='Fail.')
+            return redirect('/')
     return render_template('login.html')
 
 
 @app.route('/bbc', methods=['GET', 'POST'])
 def hello():
+    global login
     if login in session:
+        print('Login success.')
         flag = True
         data = []
         if request.method == 'POST':
@@ -62,7 +62,6 @@ def hello():
                         flash('Заявка отправлена.')
                     return redirect('/bbc')
 
-                # if request.form.get('button') == 'Удалить всё':
                 case 'Удалить всё':
                     print('Удалить всё.')
                     try:
@@ -75,12 +74,12 @@ def hello():
                     flash(f'Все файлы удалены.')
                     redirect('/bbc')
 
-                case _:  # request.form['button']:
+                case _:
                     print('Удалить.')
                     print(request.form['button'])
                     filename = request.form['button']
                     try:
-                        ans = y.remove(f'/BBC/download/{filename}')
+                        y.remove(f'/BBC/download/{filename}')
                     except Exception as error:
                         print(error)
                         pass

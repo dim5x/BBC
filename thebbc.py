@@ -21,27 +21,27 @@ def convert_bytes(size: int) -> str:
         size /= 1024.0
 
 
-# @app.route('/', methods=['GET', 'POST'])
-# def login():
-#     session.clear()
-#     global login
-#     if request.method == 'POST':
-#         login = request.form['login']
-#         password = request.form['password']
-#         password_hash = hashlib.sha3_384(bytes(password, encoding='UTF-8')).hexdigest()
-#         if password_hash == PASSWORD_HASH and login == 'Daisy':
-#             session[login] = login
-#             return redirect('/bbc')
-#         else:
-#             return redirect('/')
-#     return render_template('login.html')
-
-
 @app.route('/', methods=['GET', 'POST'])
+def login():
+    session.clear()
+    global login
+    if request.method == 'POST':
+        login = request.form['login']
+        password = request.form['password']
+        password_hash = hashlib.sha3_384(bytes(password, encoding='UTF-8')).hexdigest()
+        if password_hash == PASSWORD_HASH and login == 'Daisy':
+            session[login] = login
+            return redirect('/bbc')
+        else:
+            return redirect('/')
+    return render_template('login.html')
+
+
+@app.route('/bbc', methods=['GET', 'POST'])
 def hello():
     global login
-    # if login in session:
-    if True:
+    if login in session:
+    # if True:
         print('Login success.')
         flag = True
         data = []

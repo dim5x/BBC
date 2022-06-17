@@ -41,6 +41,7 @@ def login():
 def hello():
     global login
     if login in session:
+    # if True:
         print('Login success.')
         flag = True
         data = []
@@ -100,6 +101,7 @@ def hello():
             pass
 
         return render_template('bbc.html', data=data)
+
     return """
         <style> * {background: black; text-align:center; color: white;} a {color:blue;}</style>
         <h2>You are not <a href="/">logged in.</a></h2>
@@ -107,4 +109,4 @@ def hello():
 
 
 if __name__ == '__main__':
-    app.run(debug=False)
+    app.run(host='0.0.0.0', debug=False)

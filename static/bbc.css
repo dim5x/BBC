@@ -2,11 +2,18 @@ html {
     background-image: url("backgrounds-html-1511629460.jpg");
 }
 
+::-webkit-scrollbar {
+    width: 0; /* Remove scrollbar space */
+    background: transparent; /* Optional: just make scrollbar invisible */
+}
+
 .basediv {
     border: black solid 1px;
     border-radius: 25px;
     height: 49%;
+    overflow-y: scroll;
 }
+
 
 h2 {
     color: #dcd0d0;
@@ -27,40 +34,53 @@ th {
     text-align: center;
 }
 
+td {
+    border: solid 1px;
+    padding-left: 10px !important;
+}
 
 .last_td {
-    padding: 0;
+    padding: 0 !important;
     width: 30px;
 }
 
-td {
-    border: solid 1px;
-    padding-left: 10px;
+
+/*tr {*/
+/*    background-color: #dbaf8a;*/
+/*    color: black;*/
+/*}*/
+
+img {
+    position: absolute;
+    right: 10px;
+    top: 15px;
 }
 
-tr {
-    background-color: #dbaf8a;
-    color: black;
-    /*padding-left: 10px;*/
-}
-
-
-tbody tr:hover {
-    background-color: rgba(205, 144, 144, 0.19);
-    color: #e8cfcf;
-    /*font-size: 1.5em;*/
+table.dataTable td:hover {
+    background-color: rgba(255, 255, 255, 0.25);
+    /*color: #e8cfcf;*/
 }
 
 
 .delete_button {
     background-color: #AB6B48;
+    border: 1px solid;
     text-align: center;
     width: 100%;
 }
 
 #send_button {
+    background-color: #AB6B48;
+    border: 1px solid;
     border-radius: 25px;
+    cursor: pointer;
+    *cursor: hand;
     font-size: 12pt;
+    padding: 0.5em 1em;
+}
+
+#send_button:hover {
+    background-color: rgba(205, 144, 144, 0.19);
 }
 
 textarea {
@@ -74,4 +94,99 @@ textarea {
 ::placeholder {
     color: black;
     font-size: 12pt;
+}
+
+/*Search+++++++++++++++++++*/
+.dataTables_filter input {
+    background-color: rgba(255, 255, 255, 0.3);
+    border-radius: 25px;
+    color: #0c0c0c;
+    overflow: hidden;
+    text-align: center;
+}
+
+/*Table color++++++++++++++++++*/
+table.dataTable tbody th, table.dataTable tbody td {
+    background-color: #dbaf8a;
+    color: black;
+    padding: 0;
+}
+
+/*/++++++++++++++++++++++++++++++*/
+select {
+    background-color: rgba(255, 255, 255, 0.3);
+    color: black;
+    text-align: center;
+}
+
+
+.dataTables_length {
+    float: left;
+    padding-left: 10px;
+}
+
+.dataTables_wrapper .dataTables_filter {
+    float: right;
+    padding-right: 5px;
+    padding-bottom: 5px;
+    text-align: right;
+}
+
+.dataTables_wrapper .dataTables_paginate {
+    float: right;
+    padding-top: 0.25em;
+    text-align: right;
+}
+
+/*Кнопки пагинации/ */
+.dataTables_wrapper .dataTables_paginate .paginate_button {
+    background-color: #AB6B48;
+    border: 1px solid;
+    border-radius: 25px;
+    color: black !important;
+    cursor: pointer;
+    *cursor: hand;
+    margin-left: 2px;
+    /*box-sizing: border-box;*/
+    /*display: inline-block;*/
+    /*min-width: 1.5em;*/
+    padding: 0.5em 1em;
+    text-align: center;
+    /*text-decoration: none !important;*/
+}
+
+/*Цвета текста управ. элементов*/
+.dataTables_wrapper .dataTables_length, .dataTables_wrapper .dataTables_filter, .dataTables_wrapper .dataTables_info, .dataTables_wrapper .dataTables_processing, .dataTables_wrapper .dataTables_paginate {
+    color: white;
+}
+
+.dataTables_wrapper .dataTables_paginate .paginate_button:hover {
+    background-color: rgba(205, 144, 144, 0.19);
+}
+
+table.dataTable thead .sorting, table.dataTable thead .sorting_asc, table.dataTable thead .sorting_desc, table.dataTable thead .sorting_asc_disabled, table.dataTable thead .sorting_desc_disabled {
+    cursor: pointer;
+    *cursor: hand;
+    background-repeat: no-repeat;
+    background-position: center right
+}
+
+table.dataTable thead .sorting {
+    background-image: url("DataTables/DataTables-1.10.21/images/sort_both.png")
+}
+
+table.dataTable thead .sorting_asc {
+    background-image: url("DataTables/DataTables-1.10.21/images/sort_asc.png")
+}
+
+table.dataTable thead .sorting_desc {
+    background-image: url("DataTables/DataTables-1.10.21/images/sort_desc.png")
+}
+
+table.dataTable thead .sorting_asc_disabled {
+    background-image: url("DataTables/DataTables-1.10.21/images/sort_asc_disabled.png")
+}
+
+table.dataTable thead .sorting_desc_disabled {
+    background-image: url("DataTables/DataTables-1.10.21/images/sort_desc_disabled.png")
 }

@@ -1,5 +1,6 @@
 html {
-    background-image: url("backgrounds-html-1511629460.jpg");
+    background-image: url("wood.jpg");
+    background-repeat: no-repeat;
 }
 
 ::-webkit-scrollbar {
@@ -7,13 +8,19 @@ html {
     background: transparent; /* Optional: just make scrollbar invisible */
 }
 
-.basediv {
+.basediv1 {
     border: black solid 1px;
     border-radius: 25px;
-    height: 49%;
+    height: 30%;
     overflow-y: scroll;
 }
 
+.basediv2 {
+    border: black solid 1px;
+    border-radius: 25px;
+    height: 69%;
+    overflow-y: scroll;
+}
 
 h2 {
     color: #dcd0d0;

@@ -11,7 +11,7 @@ $(document).ready(function () {
         //     {data: 'message'},
         //     {data: 'mac'},
         // ],
-        "lengthMenu": [[7, 14, 21, -1], [7, 14, 21, "All"]],
+        "lengthMenu": [[10, 20, 30, -1], [10, 20, 30, "All"]],
         "order": [[ 2, "desc" ]]
     });
 });

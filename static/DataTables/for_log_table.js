@@ -12,6 +12,6 @@ $(document).ready(function () {
         //     {data: 'mac'},
         // ],
         "lengthMenu": [[7, 14, 21, -1], [7, 14, 21, "All"]],
-        "order": [[ 0, "desc" ]]
+        "order": [[ 2, "desc" ]]
     });
 });

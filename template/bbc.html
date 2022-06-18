@@ -3,9 +3,10 @@
     <meta charset="utf-8">
     <title>BBC downloader</title>
     <link href="../static/css/bbc.css" rel="stylesheet" type="text/css">
-{#    <meta http-equiv="Cache-Control" content="no-cache">#}
+    {#    <meta http-equiv="Cache-Control" content="no-cache">#}
     {# jquery - для работы фильтра и поиска #}
     <script type="text/javascript" charset="utf8" src="/static/js/jquery-3.5.1.min.js"></script>
+    <script type="text/javascript" charset="utf8" src="/static/js/lol.js"></script>
 
     {# Библиотека для фильтра и поиска #}
     {#    <link rel="stylesheet" type="text/css" href="/static/DataTables/datatables.min.css">#}
@@ -55,9 +56,25 @@
             <tr>
                 {#            <a href="href="data:application/pdf;base64..." download="download.pdf" target="_self"]Скачать[/a]#}
 
-                <td><a href='{{ item.link }}' download>{{ item.name }}</a></td>
+                <td><a href="{{ item.link }}" download> {{ item.name }}</a></td>
+
                 <td>{{ item.size }}</td>
                 <td>{{ item.date }}</td>
+                {#                <td>#}
+                {#                    <audio crossorigin="use-credentials" controls src= {{ item.link }}>#}
+                {#                        Your browser does not support the#}
+                {#                        <code>audio</code> element.#}
+                {#                    </audio>#}
+                {#                                </td>                #}
+
+                {#                <td>#}
+                {#                    <p>#}
+                {#                        <object type="application/x-shockwave-flash"#}
+                {#                                data="{{ item.link }}" width="100" height="20">#}
+                {#                        </object>#}
+                {#                    </p>#}
+                {#                </td>#}
+
                 <form method="post">
                     <td class="last_td">
                         <button class="delete_button" onclick="return confirm('Уверена?')">

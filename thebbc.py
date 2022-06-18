@@ -1,11 +1,14 @@
 import hashlib
 import os
 from flask import Flask, render_template, request, redirect, flash, session
+from flask_cors import CORS
+
 import yadisk
 
 app = Flask(__name__)
 app.template_folder = 'template'
 app.secret_key = b'_5#y2L"F4Q8z\n\xec]/'  # для работы session
+CORS(app)
 
 TOKEN = os.environ['TOKEN_BBC']
 PASSWORD_HASH = os.environ['PASSWORD_HASH']

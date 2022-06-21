@@ -1,5 +1,6 @@
 import hashlib
 import os
+import pickle
 from flask import Flask, render_template, request, redirect, flash, session
 from flask_cors import CORS
 
@@ -16,6 +17,9 @@ PASSWORD_HASH = os.environ['PASSWORD_HASH']
 y = yadisk.YaDisk(token=TOKEN)
 login: str = ''
 
+# with open('desc.pickle', 'rb') as f:
+#     d = pickle.load(f)
+
 
 def convert_bytes(size: int) -> str:
     for x in ['bytes', 'KB', 'MB', 'GB']:
@@ -26,7 +30,7 @@ def convert_bytes(size: int) -> str:
 
 @app.route('/', methods=['GET', 'POST'])
 def login():
-    session.clear()
+    # session.clear()
     global login
     if request.method == 'POST':
         login = request.form['login']
@@ -44,7 +48,7 @@ def login():
 def hello():
     global login
     if login in session:
-    # if True:
+        # if True:
         print('Login success.')
         flag = True
         data = []

@@ -30,7 +30,7 @@ logging.info('Start script.')
 y = yadisk.YaDisk(token=TOKEN)
 
 
-def file_exists() -> list[str] | []:
+def file_exists() -> list:
     return [i.name for i in y.listdir('/BBC') if '.txt' in i.name]
 
 
@@ -38,11 +38,11 @@ def download(list_of_requests: list) -> None:
     links = []
     logging.info('File exists.')
     for request in list_of_requests:
-        y.download(f'/BBC/{request}', f'{request}.txt')
-        with open(f'{request}', 'r', encoding='utf-8') as f:
-            links.append(*[i.strip() for i in f.readlines()])
+        y.download(f'/BBC/{request}', f'download/{request}')
+        with open(f'download/{request}', 'r', encoding='utf-8') as f:
+            links.extend([i.strip() for i in f.readlines()])
             logging.info(f'{links}')
-        y.remove(f'{request}')
+        y.remove(f'/BBC/{request}')
         logging.info('Заявка удалена.')
     try:
         for link in links:
@@ -75,6 +75,8 @@ def upload():
             except yadisk.exceptions.PathExistsError as error:
                 logging.exception(error)
                 pass
+        else:
+            os.remove(file)
 
 
 def job():

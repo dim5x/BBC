@@ -30,16 +30,20 @@ logging.info('Start script.')
 y = yadisk.YaDisk(token=TOKEN)
 
 
-def file_exists():
-    return 'request.txt' in [i.name for i in y.listdir('/BBC')]
+def file_exists() -> list[str] | []:
+    return [i.name for i in y.listdir('/BBC') if '.txt' in i.name]
 
 
-def download():
+def download(list_of_requests: list) -> None:
+    links = []
     logging.info('File exists.')
-    y.download('/BBC/request.txt', 'request.txt')
-    with open('request.txt', 'r', encoding='utf-8') as f:
-        links = [i.strip() for i in f.readlines()]
-        logging.info(f'{links}')
+    for request in list_of_requests:
+        y.download(f'/BBC/{request}', f'{request}.txt')
+        with open(f'{request}', 'r', encoding='utf-8') as f:
+            links.append(*[i.strip() for i in f.readlines()])
+            logging.info(f'{links}')
+        y.remove(f'{request}')
+        logging.info('Заявка удалена.')
     try:
         for link in links:
             logging.info('Start download.')
@@ -57,8 +61,8 @@ def download():
 
 
 def upload():
-    y.remove('/BBC/request.txt')
-    logging.info('Заявка удалена.')
+    # y.remove('/BBC/request.txt')
+    # logging.info('Заявка удалена.')
     for file in os.scandir('download'):
         if file.name.endswith('.m4a'):
             try:
@@ -75,8 +79,8 @@ def upload():
 
 def job():
     logging.info('Start job...')
-    if file_exists():
-        download()
+    if list_of_requests := file_exists():
+        download(list_of_requests)
         upload()
     else:
         logging.info('File NOT exists. Stop job.')

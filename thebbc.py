@@ -1,6 +1,7 @@
 import hashlib
 import os
 import pickle
+import time
 from flask import Flask, render_template, request, redirect, flash, session
 from flask_cors import CORS
 
@@ -57,10 +58,13 @@ def hello():
                 case 'Отправить':
                     print('Отправить')
                     links = request.form['text']
-                    with open('request.txt', 'w') as f:
+                    # with open('request.txt', 'w') as f:
+                    #     f.write(links)
+                    filename = f"{time.strftime('%H%M%S')}.txt"
+                    with open(filename, 'w') as f:
                         f.write(links)
                     try:
-                        y.upload('request.txt', '/BBC/request.txt')
+                        y.upload(filename, f'/BBC/{filename}')
                     except yadisk.exceptions.PathExistsError as error:
                         print(error)
                         flash('Ресурс "/BBC/request.txt" уже существует. Обратитесь-ка к Дмитричу.')

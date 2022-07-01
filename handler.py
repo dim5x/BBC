@@ -24,7 +24,7 @@ logging.basicConfig(handlers=(file_log, console_log),
                     encoding='utf-8',
                     level=logging.DEBUG,
                     format='%(asctime)s %(levelname)s %(message)s',
-                    datefmt='%d.%m.%Y %I:%M:%S')
+                    datefmt='%d.%m.%Y %H:%M:%S')
 
 logging.info('Start script.')
 y = yadisk.YaDisk(token=TOKEN)
@@ -51,7 +51,7 @@ def download(list_of_requests: list) -> None:
             logging.debug(f'{res.stdout=}')
             p = str(res.stdout)
             if 'WARNING' in p:
-                logging.warning(p)
+                logging.debug(p)
             if '--pid-recursive' in p:
                 res = subprocess.run([GET_IPLAYER, '-o', 'download', '--pid-recursive', link])
                 logging.debug(res)

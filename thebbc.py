@@ -54,7 +54,7 @@ def order():
         sqlite_connection = sqlite3.connect('Gbbc.sqlite')
         cursor = sqlite_connection.cursor()
 
-        sqlite_select_query = "SELECT * FROM article WHERE week_number=?"
+        sqlite_select_query = "SELECT * FROM article WHERE week_number=? ORDER BY name, subname"
         cursor.execute(sqlite_select_query, (39,))
 
         rows = cursor.fetchall()

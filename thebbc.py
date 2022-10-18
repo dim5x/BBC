@@ -48,7 +48,8 @@ def login():
 
 @app.route('/order', methods=['GET', 'POST'])
 def order():
-    global login, rows
+    # rows = []
+    global login
     if login in session:
         sqlite_connection = sqlite3.connect('Gbbc.sqlite')
         cursor = sqlite_connection.cursor()
@@ -110,9 +111,9 @@ def order():
     # return redirect(f'/{week}')
     # return render_template('order.html', rows=rows)
 
-    # return render_template('order.html', rows=rows)
+        return render_template('order.html', rows=rows)
 
-    return render_template('order.html', rows=rows)
+    return render_template('order.html')
 
 
 # @app.route("/getandpost", methods=["GET", "POST"])

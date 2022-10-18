@@ -48,7 +48,7 @@ def login():
 
 @app.route('/order', methods=['GET', 'POST'])
 def order():
-    global login
+    global login, rows
     if login in session:
         sqlite_connection = sqlite3.connect('Gbbc.sqlite')
         cursor = sqlite_connection.cursor()

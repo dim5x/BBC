@@ -38,14 +38,14 @@
 {#                <td><img src="/static/img/p01lz9s7.jpg"></td>#}
 {#                src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAUAAAAFCAYAAACNbyblAAAAHElEQVQI12P4//8/w38GIAXDIBKE0DHxgljNBAAO9TXL0Y4OHwAAAABJRU5ErkJggg=="#}
 
-                <td><img class="img" src="data:image/jpeg;base64,{{ item[11] }}"></td>
+                <td title='{{ item[6] }}'><img class="img" src="data:image/jpeg;base64,{{ item[11] }}"></td>
                 <td>
                     <h2>{{ item[0] }}</h2> {#name#}
                     {{ item[1] }}<br> {#subname#}
                     {{ item[2] }}{#series#}
                     {{ item[3] }}{#episodes#}
                 </td>
-                <td class='disc' title='{{ item[6] }}'>{{ item[5] }} </td>
+                <td class='disc'>{{ item[5] }} </td>
                 <td>{{ item[7] }}</td>{#duration#}
                 <td>{{ item[9] }}</td>{#genre#}
                 {#                <td>#}

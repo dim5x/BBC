@@ -1,10 +1,10 @@
 import hashlib
 import os
-import pickle
+# import pickle
 import time
 from flask import Flask, render_template, request, redirect, flash, session
 from flask_cors import CORS
-
+import sqlite3
 import yadisk
 
 app = Flask(__name__)
@@ -17,6 +17,7 @@ PASSWORD_HASH = os.environ['PASSWORD_HASH']
 
 y = yadisk.YaDisk(token=TOKEN)
 login: str = ''
+
 
 # with open('desc.pickle', 'rb') as f:
 #     d = pickle.load(f)
@@ -43,6 +44,85 @@ def login():
         else:
             return redirect('/')
     return render_template('login.html')
+
+
+@app.route('/order', methods=['GET', 'POST'])
+def order():
+    global login
+    if login in session:
+        sqlite_connection = sqlite3.connect('Gbbc.sqlite')
+        cursor = sqlite_connection.cursor()
+
+        sqlite_select_query = "SELECT * FROM article WHERE week_number=?"
+        cursor.execute(sqlite_select_query, (39,))
+
+        rows = cursor.fetchall()
+        # print(rows)
+        if request.method == 'POST':
+            # match request.form.get('button'):
+            #     case 'Заказать':
+            # print('Заказать')
+            # links = request.form['button']
+            # print(links)
+
+            print('form', request.form)
+            link = request.form.get('link')
+            print('link=', link)
+
+            filename = f"{time.strftime('%H%M%S')}.txt"
+            with open(filename, 'w') as f:
+                f.write(link)
+            try:
+                y.upload(filename, f'/BBC/{filename}')
+                print(f'try {filename}')
+            except yadisk.exceptions.PathExistsError as error:
+                print(error)
+    # print('button=', request.form.get('week'))
+    # week = request.form.get('week').split('-')[1]
+    # print(f'{week=}')
+    # sqlite_connection = sqlite3.connect('Gbbc.sqlite')
+    # cursor = sqlite_connection.cursor()
+    #
+    # sqlite_select_query = "SELECT * FROM article WHERE week_number=?"
+    # cursor.execute(sqlite_select_query, (39,))
+
+    # rows = cursor.fetchall()
+    # print(rows)
+    # print('todo=', request.form.get('todo-form'))
+    # print('value=', request.form.get('value'))
+
+    # match request.form.get('todo'):
+    #     case 'Заказать':
+    #         print(request.data)
+    #         todo = request.form.get("button")
+    #         print(todo)
+    #         print(request.form['button'])
+    #         # with open('request.txt', 'w') as f:
+    #         #     f.write(links)
+    #         filename = f"{time.strftime('%H%M%S')}.txt"
+    #         with open(filename, 'w') as f:
+    #             f.write(links)
+    #         try:
+    #             # y.upload(filename, f'/BBC/{filename}')
+    #             print(f'try{filename}')
+    #         except yadisk.exceptions.PathExistsError as error:
+    #             print(error)
+    # return redirect(f'/{week}')
+    # return render_template('order.html', rows=rows)
+
+    # return render_template('order.html', rows=rows)
+
+    return render_template('order.html', rows=rows)
+
+
+# @app.route("/getandpost", methods=["GET", "POST"])
+# # @login_required
+# def getandpost():
+#     print(request.method)  # получаем ессно, POST
+#     if request.method == "POST":
+#         print(request.is_json)  # Пишет True - типа полученный ответ и есть Джейсон???
+#         print(request.mimetype)  # application/json -
+#         print(request.data)  # вот они бинарные данные, например
 
 
 @app.route('/bbc', methods=['GET', 'POST'])

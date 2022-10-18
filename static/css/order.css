@@ -8,17 +8,17 @@ html {
     background: transparent; /* Optional: just make scrollbar invisible */
 }
 
-.basediv1 {
-    border: black solid 1px;
-    border-radius: 25px;
-    height: 30%;
-    overflow-y: scroll;
-}
+/*.basediv1 {*/
+/*    border: black solid 1px;*/
+/*    border-radius: 25px;*/
+/*    height: 30%;*/
+/*    overflow-y: scroll;*/
+/*}*/
 
 .basediv2 {
     border: black solid 1px;
     border-radius: 25px;
-    height: 69%;
+    height: 100%;
     overflow-y: scroll;
 }
 
@@ -39,30 +39,32 @@ th {
     background-color: #AB6B48;
     color: black;
     text-align: center;
+  /*  position: sticky;*/
+  /*  top: 0;*/
+  /*background: white;*/
+  /*  display: block;*/
 }
 
 td {
     border: solid 1px;
-    padding-left: 10px !important;
+    padding-left: 2px !important;
+    text-align: center;
 }
 
 .last_td {
     padding: 0 !important;
     width: 30px;
 }
-
-
-/*tr {*/
-/*    background-color: #dbaf8a;*/
-/*    color: black;*/
-/*}*/
-
-img {
-    position: absolute;
-    right: 10px;
-    top: 45px;
+.disc{
+    text-align: left;
+    padding: 10px !important;
 }
 
+
+img{
+    padding: 2px;
+
+}
 a {
     color: black;
     text-decoration: none;
@@ -122,6 +124,7 @@ table.dataTable tbody th, table.dataTable tbody td {
     background-color: #dbaf8a;
     color: black;
     padding: 0;
+
 }
 
 /*/++++++++++++++++++++++++++++++*/
@@ -180,27 +183,29 @@ table.dataTable thead .sorting, table.dataTable thead .sorting_asc, table.dataTa
     cursor: pointer;
     *cursor: hand;
     background-repeat: no-repeat;
-    background-position: center right
+    background-position: center right;
+
+
 }
 
 table.dataTable thead .sorting {
-    background-image: url("../DataTables/DataTables-1.10.21/images/sort_both.png")
+    background-image: url("../DataTables/DataTables-1.10.21/images/sort_both.png");
 }
 
 table.dataTable thead .sorting_asc {
-    background-image: url("../DataTables/DataTables-1.10.21/images/sort_asc.png")
+    background-image: url("../DataTables/DataTables-1.10.21/images/sort_asc.png");
 }
 
 table.dataTable thead .sorting_desc {
-    background-image: url("../DataTables/DataTables-1.10.21/images/sort_desc.png")
+    background-image: url("../DataTables/DataTables-1.10.21/images/sort_desc.png");
 }
 
 table.dataTable thead .sorting_asc_disabled {
-    background-image: url("../DataTables/DataTables-1.10.21/images/sort_asc_disabled.png")
+    background-image: url("../DataTables/DataTables-1.10.21/images/sort_asc_disabled.png");
 }
 
 table.dataTable thead .sorting_desc_disabled {
-    background-image: url("../DataTables/DataTables-1.10.21/images/sort_desc_disabled.png")
+    background-image: url("../DataTables/DataTables-1.10.21/images/sort_desc_disabled.png");
 }
 
 
@@ -236,7 +241,7 @@ li a {
 
 li a:hover:not(.active) {
     /*background-color: #111;*/
-    background-color: rgba(205, 144, 144, 0.19);;
+    background-color: rgba(205, 144, 144, 0.19);
 }
 
 .active {

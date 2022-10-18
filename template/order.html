@@ -36,7 +36,9 @@
         {% for item in rows %}
             <tr>
 {#                <td><img src="/static/img/p01lz9s7.jpg"></td>#}
-                <td><img src={{ item[4] }}></td>
+{#                src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAUAAAAFCAYAAACNbyblAAAAHElEQVQI12P4//8/w38GIAXDIBKE0DHxgljNBAAO9TXL0Y4OHwAAAABJRU5ErkJggg=="#}
+
+                <td><img class="img" src="data:image/jpeg;base64,{{ item[11] }}"></td>
                 <td>
                     <h2>{{ item[0] }}</h2> {#name#}
                     {{ item[1] }}<br> {#subname#}

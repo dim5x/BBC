@@ -58,6 +58,9 @@ def order():
         cursor.execute(sqlite_select_query, (39,))
 
         rows = cursor.fetchall()
+        # print(rows[11])
+        print(rows[0][11])
+        print(type(rows[0][11]))
         # print(rows)
         if request.method == 'POST':
             # match request.form.get('button'):
@@ -78,38 +81,38 @@ def order():
                 print(f'try {filename}')
             except yadisk.exceptions.PathExistsError as error:
                 print(error)
-    # print('button=', request.form.get('week'))
-    # week = request.form.get('week').split('-')[1]
-    # print(f'{week=}')
-    # sqlite_connection = sqlite3.connect('Gbbc.sqlite')
-    # cursor = sqlite_connection.cursor()
-    #
-    # sqlite_select_query = "SELECT * FROM article WHERE week_number=?"
-    # cursor.execute(sqlite_select_query, (39,))
+        # print('button=', request.form.get('week'))
+        # week = request.form.get('week').split('-')[1]
+        # print(f'{week=}')
+        # sqlite_connection = sqlite3.connect('Gbbc.sqlite')
+        # cursor = sqlite_connection.cursor()
+        #
+        # sqlite_select_query = "SELECT * FROM article WHERE week_number=?"
+        # cursor.execute(sqlite_select_query, (39,))
 
-    # rows = cursor.fetchall()
-    # print(rows)
-    # print('todo=', request.form.get('todo-form'))
-    # print('value=', request.form.get('value'))
+        # rows = cursor.fetchall()
+        # print(rows)
+        # print('todo=', request.form.get('todo-form'))
+        # print('value=', request.form.get('value'))
 
-    # match request.form.get('todo'):
-    #     case 'Заказать':
-    #         print(request.data)
-    #         todo = request.form.get("button")
-    #         print(todo)
-    #         print(request.form['button'])
-    #         # with open('request.txt', 'w') as f:
-    #         #     f.write(links)
-    #         filename = f"{time.strftime('%H%M%S')}.txt"
-    #         with open(filename, 'w') as f:
-    #             f.write(links)
-    #         try:
-    #             # y.upload(filename, f'/BBC/{filename}')
-    #             print(f'try{filename}')
-    #         except yadisk.exceptions.PathExistsError as error:
-    #             print(error)
-    # return redirect(f'/{week}')
-    # return render_template('order.html', rows=rows)
+        # match request.form.get('todo'):
+        #     case 'Заказать':
+        #         print(request.data)
+        #         todo = request.form.get("button")
+        #         print(todo)
+        #         print(request.form['button'])
+        #         # with open('request.txt', 'w') as f:
+        #         #     f.write(links)
+        #         filename = f"{time.strftime('%H%M%S')}.txt"
+        #         with open(filename, 'w') as f:
+        #             f.write(links)
+        #         try:
+        #             # y.upload(filename, f'/BBC/{filename}')
+        #             print(f'try{filename}')
+        #         except yadisk.exceptions.PathExistsError as error:
+        #             print(error)
+        # return redirect(f'/{week}')
+        # return render_template('order.html', rows=rows)
 
         return render_template('order.html', rows=rows)
 

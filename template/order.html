@@ -1,7 +1,7 @@
 <html lang="ru">
 <head>
     <meta charset="utf-8">
-    <title>test</title>
+    <title>Заказ</title>
     <link href="../static/css/order.css" rel="stylesheet" type="text/css">
     {#    <link href="../static/css/week.css" rel="stylesheet" type="text/css">#}
     {#    <meta http-equiv="Cache-Control" content="no-cache">#}
@@ -35,9 +35,6 @@
         <tbody>
         {% for item in rows %}
             <tr>
-{#                <td><img src="/static/img/p01lz9s7.jpg"></td>#}
-{#                src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAUAAAAFCAYAAACNbyblAAAAHElEQVQI12P4//8/w38GIAXDIBKE0DHxgljNBAAO9TXL0Y4OHwAAAABJRU5ErkJggg=="#}
-
                 <td title='{{ item[6] }}'><img class="img" src="data:image/jpeg;base64,{{ item[11] }}"></td>
                 <td>
                     <h2>{{ item[0] }}</h2> {#name#}
@@ -45,53 +42,24 @@
                     {{ item[2] }}{#series#}
                     {{ item[3] }}{#episodes#}
                 </td>
-                <td class='disc'>{{ item[5] }} </td>
-                <td>{{ item[7] }}</td>{#duration#}
-                <td>{{ item[9] }}</td>{#genre#}
-                {#                <td>#}
-                {#                    <form method="post" id="todo-form">#}
-                {#                        <input id="todo" name=button value="{{ item[4] }}">#}
-                {#                        <button type="submit">Заказать</button>#}
-                {#                    </form>#}
+                {#summary#}
+                <td>{{ item[5] }} </td>
+                {#duration#}
+                <td>{{ item[7] }}</td>
+                {#genre#}
+                <td>{{ item[9] }}</td>
+
 
                 <td class="last_td">
-                    {#                    <form method="post" id="todo-form" action="/">#}
-                    {#                        <input id="todo" name="lol" value="{{ item[4] }}">#}
-                    {#                        <button name='kek' type="submit">Заказать</button>#}
-                    {##}
-                    {#                    </form>#}
-                    {#                    <form method="post" id="todo-form" >#}
-                    {#                        <button class="delete_button" id="submit" onclick="alerted();">#}
-                    {#                            <input id="todo" type=hidden value="{{ item[4] }}" name='button'>Заказать#}
-                    {#                        </button>#}
-                    {#                    </form>#}
-                    <form method="POST">
-                        {#                        <input class="bbc_link" value="{{ item[4] }}">#}
-                        <button id="send" class="delete_button" value="{{ item[4] }}">Заказать</button>
-                    </form>
-                    {##}
-                    {#                    </form>#}
+                    {# dowloaded or not #}
+                    {% if item[12] %}
+                        <button disabled class="send_button">✓</button>
+                    {% else %}
+                        <form method="POST">
+                            <button id="send" class="send_button" value="{{ item[4] }}">Заказать</button>
+                        </form>
+                    {% endif %}
                 </td>
-
-
-                {#                <form method="post" id="changeform" action="/getandpost">#}
-                {#                    <td class="last_td">#}
-                {#                        <button type="button" class="btn btn-primary" name="submitbutton">Сохранить изменения</button>#}
-
-                {#                                                <button id='submit' class="delete_button">#}
-                {#                                                    <input id='test1' type=hidden value="{{ item[4] }}" name=button>Заказать</input>#}
-                {#                                                </button>#}
-                {#
-
- <form id="changeform" action="/getandpost" method="post" name="changeform">#}
-                {#                            <input type="hidden" id="test1" name="test1" value="{{ item[4] }}"/>#}
-                {#                            <input type="text" id="test2" name="test2"/>#}
-                {#                            <input type="text" id="test3" name="test3"/>#}
-                {#                            <button type="button" id='submit' class="btn btn-primary" name="submitbutton">#}
-                {#                                Заказать#}
-                {#                            </button>#}
-                {#                    </td>#}
-                {#                </td>#}
             </tr>
         {% endfor %}
         </tbody>

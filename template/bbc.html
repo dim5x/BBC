@@ -8,7 +8,6 @@
     <ul>
         <li><a class="active" href="/bbc">Файлы</a></li>
         <li><a href="/order">Заказ</a></li>
-        {#  <li><a href="#contact">Contact</a></li>#}
         <li style="float:right"><a href="#about">Об.</a></li>
     </ul>
 </head>
@@ -51,30 +50,12 @@
         <tbody>
         {% for item in data %}
             <tr>
-                {#            <a href="href="data:application/pdf;base64..." download="download.pdf" target="_self"]Скачать[/a]#}
-
                 <td><a href="{{ item.link }}" download> {{ item.name }}</a></td>
-
                 <td>{{ item.size }}</td>
-                <td>{{ item.date }}</td>
-                {#                <td>#}
-                {#                    <audio crossorigin="use-credentials" controls src= {{ item.link }}>#}
-                {#                        Your browser does not support the#}
-                {#                        <code>audio</code> element.#}
-                {#                    </audio>#}
-                {#                                </td>                #}
-
-                {#                <td>#}
-                {#                    <p>#}
-                {#                        <object type="application/x-shockwave-flash"#}
-                {#                                data="{{ item.link }}" width="100" height="20">#}
-                {#                        </object>#}
-                {#                    </p>#}
-                {#                </td>#}
-
+                <td><span style="display: none;">{{ item.timestamp }}</span>{{ item.date }}</td>
                 <form method="post">
                     <td class="last_td">
-                        <button class="delete_button" onclick="return confirm('Уверена?')">
+                        <button id="delete_button" class="delete_button" onclick="return confirm('Уверена?')">
                             <input type=hidden value="{{ item.name }}" name=button onclick="return confirm('Уверена?')">Удалить</input>
                         </button>
                     </td>
@@ -84,6 +65,7 @@
         </tbody>
     </table>
 </div>
+
 {# jquery - для работы фильтра и поиска #}
 <script type="text/javascript" charset="utf8" src="/static/js/jquery-3.5.1.min.js"></script>
 {#<script type="text/javascript" charset="utf8" src="/static/js/order.js"></script>#}

@@ -8,13 +8,6 @@ html {
     background: transparent; /* Optional: just make scrollbar invisible */
 }
 
-/*.basediv1 {*/
-/*    border: black solid 1px;*/
-/*    border-radius: 25px;*/
-/*    height: 30%;*/
-/*    overflow-y: scroll;*/
-/*}*/
-
 .basediv2 {
     border: black solid 1px;
     border-radius: 25px;
@@ -39,10 +32,6 @@ th {
     background-color: #AB6B48;
     color: black;
     text-align: center;
-  /*  position: sticky;*/
-  /*  top: 0;*/
-  /*background: white;*/
-  /*  display: block;*/
 }
 
 td {
@@ -55,16 +44,18 @@ td {
     padding: 0 !important;
     width: 30px;
 }
-.disc{
+
+.disc {
     text-align: left;
     padding: 10px !important;
 }
 
 
-.img{
+.img {
     padding: 2px;
 
 }
+
 a {
     color: black;
     text-decoration: none;
@@ -76,7 +67,7 @@ table.dataTable td:hover {
 }
 
 
-.delete_button {
+.send_button {
     background-color: #AB6B48;
     border: 1px solid;
     text-align: center;
@@ -247,5 +238,4 @@ li a:hover:not(.active) {
 .active {
     /*background-color: #4CAF50;*/
     background-color: #AB6B48;
-
 }

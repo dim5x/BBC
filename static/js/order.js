@@ -18,7 +18,8 @@ $(document).on("click", "#send", function () {
         // }
     });
     this.setAttribute('disabled', true);
-    this.textContent='✓';
+    // this.textContent='✓';
+    this.textContent='v';
     this.style.color='green';
     this.style.borderColor='black';
     return false;

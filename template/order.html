@@ -24,7 +24,7 @@
 <div class="basediv2">
     <table id="state">
         <thead>
-        <th>Картинка</th>
+        <th></th>
         <th>Название</th>
         <th>Описание</th>
         <th>Длительность</th>
@@ -35,28 +35,34 @@
         <tbody>
         {% for item in rows %}
             <tr>
-                <td title='{{ item[6] }}'><img class="img" src="data:image/jpeg;base64,{{ item[11] }}"></td>
+                <td title='{{ item.long_synopsis }}'><img class="img" src="data:image/jpeg;base64,{{ item.image }}"></td>
                 <td>
-                    <h2>{{ item[0] }}</h2> {#name#}
-                    {{ item[1] }}<br> {#subname#}
-                    {{ item[2] }}{#series#}
-                    {{ item[3] }}{#episodes#}
+                    <h2>{{ item.title }}</h2> {#title#}
+                    {{ item.subtitle }}<br> {#subtitle#}
+                    {{ item.series }}{#series#}
+                    {% if item.episode_position %}
+                        Episode {{ item.episode_position }} of {{ item.episode_count }}{#episodes#}
+                    {% endif %}
                 </td>
                 {#summary#}
-                <td>{{ item[5] }} </td>
+                <td>{{ item.medium_synopsis }} </td>
                 {#duration#}
-                <td>{{ item[7] }}</td>
+                {#            {{ str(datetime.timedelta(seconds=item[8])) }}#}
+                <td data-sort={{ item.duration }}>
+{#                    <span style="display: none;">{{ item[8] |int }} </span>#}
+                    {{ convert(item.duration) }}
+                </td>
                 {#genre#}
-                <td>{{ item[9] }}</td>
+                <td>{{ item.genre }}</td>
 
 
                 <td class="last_td">
                     {# dowloaded or not #}
-                    {% if item[12] %}
-                        <button disabled class="send_button">✓</button>
+                    {% if item.downloaded %}
+                        <button disabled class="send_button">v</button>
                     {% else %}
                         <form method="POST">
-                            <button id="send" class="send_button" value="{{ item[4] }}">Заказать</button>
+                            <button id="send" class="send_button" value="{{ item.url_id }}">Заказать</button>
                         </form>
                     {% endif %}
                 </td>

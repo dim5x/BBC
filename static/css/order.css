@@ -4,15 +4,15 @@ html {
 }
 
 ::-webkit-scrollbar {
-    width: 0; /* Remove scrollbar space */
-    background: transparent; /* Optional: just make scrollbar invisible */
+    /*width: 0; !* Remove scrollbar space *!*/
+    /*background: transparent; !* Optional: just make scrollbar invisible *!*/
 }
 
 .basediv2 {
     border: black solid 1px;
     border-radius: 25px;
     height: 100%;
-    overflow-y: scroll;
+    /*overflow-y: scroll;*/
 }
 
 h3 {

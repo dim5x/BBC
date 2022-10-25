@@ -1,4 +1,4 @@
-from datetime import datetime
+from datetime import datetime, timedelta
 import hashlib
 import os
 import sqlite3
@@ -20,12 +20,34 @@ PASSWORD_HASH = os.environ['PASSWORD_HASH']
 y = yadisk.YaDisk(token=TOKEN)
 login: str = ''
 
+go_to_login = """
+        <style> * {background: black; text-align:center; color: white;} a {color:blue;}</style>
+        <h2>You are not <a href="/">logged in.</a></h2>
+        """
+
 
 def convert_bytes(size: int) -> str:
+    ''' Человекочитаемая конвертация байт. '''
     for x in ['bytes', 'KB', 'MB', 'GB']:
         if size < 1024.0:
             return f'{size:.2f} {x}'
         size /= 1024.0
+
+
+@app.context_processor
+def wrapper():
+    '''
+    Размещение в шаблонизаторе Jinja своей функции в {{ }},
+    которая переводит секунды в человекочитаемый формат.
+    '''
+
+    def convert(seconds=0):
+        _, _, _, h, m, *_ = list(time.gmtime(seconds))
+        h = f'{h} hours' if h else ''
+        m = f'{m} minutes' if m else ''
+        return f'{h} {m}'
+
+    return dict(convert=convert)
 
 
 @app.route('/', methods=['GET', 'POST'])
@@ -45,7 +67,7 @@ def login():
 
 
 @app.route('/bbc', methods=['GET', 'POST'])
-def hello():
+def bbc():
     global login
     if login in session:
         # if True:
@@ -111,31 +133,50 @@ def hello():
 
         return render_template('bbc.html', data=data)
 
-    return """
-        <style> * {background: black; text-align:center; color: white;} a {color:blue;}</style>
-        <h2>You are not <a href="/">logged in.</a></h2>
-        """
+    return go_to_login
 
 
 @app.route('/order', methods=['GET', 'POST'])
 def order():
     global login
+    rows = []
     if login in session:
-        sqlite_connection = sqlite3.connect('Gbbc.sqlite')
+        sqlite_connection = sqlite3.connect('GJbbc.sqlite')
         cursor = sqlite_connection.cursor()
 
-        sqlite_select_query = "SELECT * FROM article WHERE week_number=? ORDER BY name, subname"
-        cursor.execute(sqlite_select_query, (39,))
+        sqlite_select_query = "SELECT * FROM article WHERE week_number=? ORDER BY title, subtitle"
+        cursor.execute(sqlite_select_query, (40,))
 
-        rows = cursor.fetchall()
-
+        for row in cursor.fetchall():
+            d = {'title': row[0],
+                 'subtitle': row[1],
+                 'medium_synopsis': row[2],
+                 'long_synopsis': row[3],
+                 'series': row[4],
+                 'episode_position': row[5],
+                 'episode_count': row[6],
+                 'duration': row[7],
+                 'genre': row[8],
+                 'genre_id1': row[9],
+                 'genre_id2': row[10],
+                 'genre_id3': row[11],
+                 'genre_id4': row[12],
+                 'genre_id5': row[13],
+                 'img_id': row[14],
+                 'image': row[15],
+                 'url_id': row[16],
+                 'week_number': row[17],
+                 'downloaded': row[18],
+                 }
+            rows.append(d)
+            # print(rows)
         if request.method == 'POST':
 
             print('form', request.form)
             link = request.form.get('link')
             print('link=', link)
 
-            sqlite_update_query = """UPDATE article SET download = ? where url = ?"""
+            sqlite_update_query = """UPDATE article SET downloaded = ? where url_id = ?"""
             value = (1, link)
             cursor.execute(sqlite_update_query, value)
             sqlite_connection.commit()
@@ -152,7 +193,8 @@ def order():
 
         return render_template('order.html', rows=rows)
 
-    return render_template('order.html')
+    # return render_template('order.html')
+    return go_to_login
 
 
 if __name__ == '__main__':

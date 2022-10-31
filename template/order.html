@@ -35,7 +35,8 @@
         <tbody>
         {% for item in rows %}
             <tr>
-                <td title='{{ item.long_synopsis }}'><img class="img" src="data:image/jpeg;base64,{{ item.image }}"></td>
+                <td title='{{ item.long_synopsis }}'><img class="img" src="data:image/jpeg;base64,{{ item.image }}">
+                </td>
                 <td>
                     <h2>{{ item.title }}</h2> {#title#}
                     {{ item.subtitle }}<br> {#subtitle#}
@@ -49,11 +50,18 @@
                 {#duration#}
                 {#            {{ str(datetime.timedelta(seconds=item[8])) }}#}
                 <td data-sort={{ item.duration }}>
-{#                    <span style="display: none;">{{ item[8] |int }} </span>#}
+                    {#                    <span style="display: none;">{{ item[8] |int }} </span>#}
                     {{ convert(item.duration) }}
                 </td>
+
                 {#genre#}
-                <td>{{ item.genre }}</td>
+                <td class="td_genre">
+                    {% for item in item.genre %}
+                        <a href="#" class="tag" value="{{ item }}">
+                           #{{ item }}<br>
+                        </a>
+                    {% endfor %}
+                </td>
 
 
                 <td class="last_td">

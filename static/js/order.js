@@ -1,6 +1,6 @@
 $(document).on("click", "#send", function () {
     // var param = $(".bbc_link").val();
-    var link = $(this).attr('value');
+    let link = $(this).attr('value');
     console.log(link);
     $.ajax({
         type: 'POST', // метод отправки
@@ -19,8 +19,15 @@ $(document).on("click", "#send", function () {
     });
     this.setAttribute('disabled', true);
     // this.textContent='✓';
-    this.textContent='v';
-    this.style.color='green';
-    this.style.borderColor='black';
+    this.textContent = 'v';
+    this.style.color = 'green';
+    this.style.borderColor = 'black';
     return false;
 })
+
+
+$(document).on("click", ".tag", function () {
+    let genre = $(this).attr('value');
+    let table = $('#state').DataTable();
+    table.search(genre).draw();
+});

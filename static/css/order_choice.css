@@ -25,10 +25,7 @@ select {
     background-color: #dbaf8a;;
 }
 
-/*a:hover:not(.active) {*/
-/*    !*background-color: #111;*!*/
-/*    background-color: rgba(205, 144, 144, 0.19);*/
-/*}*/
+
 
 .active {
     /*background-color: #4CAF50;*/

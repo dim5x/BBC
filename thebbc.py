@@ -26,6 +26,11 @@ GO_TO_LOGIN = """
         """
 
 
+# TODO jinja: filesizeformat(value, binary=False):
+# Фильтр filesizeformat() форматирует значение как удобочитаемый размер файла (например, 13 KB; 4,1 MB; 102 bytes и т. д.).
+#
+# По умолчанию используются десятичные префиксы (Mega, Giga и т. д.), Если второй параметр имеет значение True, используются двоичные префиксы (Mebi, Gibi).
+
 def convert_bytes(size: int) -> str:
     ''' Человекочитаемая конвертация байт. '''
     for x in ['bytes', 'KB', 'MB', 'GB']:
@@ -183,7 +188,7 @@ def order(week_id):
                  'episode_position': row[5],
                  'episode_count': row[6],
                  'duration': row[7],
-                 'genre': row[8],
+                 'genre': row[8].split('\n'),
                  'genre_id1': row[9],
                  'genre_id2': row[10],
                  'genre_id3': row[11],
@@ -196,7 +201,7 @@ def order(week_id):
                  'downloaded': row[18],
                  }
             rows.append(d)
-            # print(rows)
+            print(rows[0]['genre'])
         if request.method == 'POST':
 
             print('form', request.form)

@@ -1,0 +1,36 @@
+html {
+    background-image: url("../img/wood.jpg");
+    /*background-repeat: no-repeat;*/
+}
+
+select {
+    background-color: rgba(255, 255, 255, 0.3);
+    color: black;
+    text-align: center;
+    position: absolute;
+    top: 25%;
+    left: 50%;
+    transform: translateY(-50%);
+    transform: translateX(-50%);
+    font-family: monospace;
+    font-size: 16px;
+}
+
+#current_week {
+    color: blue;
+}
+
+.week_title {
+    /*color: rgba(205, 144, 144, 0.19);*/
+    background-color: #dbaf8a;;
+}
+
+/*a:hover:not(.active) {*/
+/*    !*background-color: #111;*!*/
+/*    background-color: rgba(205, 144, 144, 0.19);*/
+/*}*/
+
+.active {
+    /*background-color: #4CAF50;*/
+    background-color: #AB6B48;
+}

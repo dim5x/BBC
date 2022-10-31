@@ -20,7 +20,7 @@ PASSWORD_HASH = os.environ['PASSWORD_HASH']
 y = yadisk.YaDisk(token=TOKEN)
 login: str = ''
 
-go_to_login = """
+GO_TO_LOGIN = """
         <style> * {background: black; text-align:center; color: white;} a {color:blue;}</style>
         <h2>You are not <a href="/">logged in.</a></h2>
         """
@@ -32,6 +32,11 @@ def convert_bytes(size: int) -> str:
         if size < 1024.0:
             return f'{size:.2f} {x}'
         size /= 1024.0
+
+
+def weeknum_to_dates(WEEK):
+    YEAR = 2022
+    return [datetime.strptime(f'{YEAR}-{WEEK}-{DAY}', "%Y-%W-%w").strftime(' %d ') for DAY in (1, 2, 3, 4, 5, 6, 0)]
 
 
 @app.context_processor
@@ -133,19 +138,41 @@ def bbc():
 
         return render_template('bbc.html', data=data)
 
-    return go_to_login
+    return GO_TO_LOGIN
 
 
-@app.route('/order', methods=['GET', 'POST'])
-def order():
+@app.route('/order_choice', methods=['GET', 'POST'])
+def order_choice():
+    global login
+    if login in session:
+        current_week = int(datetime.today().strftime("%U"))
+
+        sqlite_connection = sqlite3.connect('Gbase.sqlite')
+        cursor = sqlite_connection.cursor()
+        sqlite_select_query = "SELECT DISTINCT week_number FROM article"
+        cursor.execute(sqlite_select_query)
+        l = cursor.fetchall()
+        # print(l)
+
+        week_list = sorted([i[0] for i in l])
+        print(week_list)
+
+        days = {i: ' '.join(weeknum_to_dates(i)) for i in week_list}
+
+        return render_template('order_choice.html', week_list=week_list, current_week=current_week, days=days)
+    return GO_TO_LOGIN
+
+
+@app.route('/week/<int:week_id>', methods=['GET', 'POST'])
+def order(week_id):
     global login
     rows = []
     if login in session:
-        sqlite_connection = sqlite3.connect('GJbbc.sqlite')
+        sqlite_connection = sqlite3.connect('Gbase.sqlite')
         cursor = sqlite_connection.cursor()
 
         sqlite_select_query = "SELECT * FROM article WHERE week_number=? ORDER BY title, subtitle"
-        cursor.execute(sqlite_select_query, (40,))
+        cursor.execute(sqlite_select_query, (week_id,))
 
         for row in cursor.fetchall():
             d = {'title': row[0],
@@ -194,7 +221,7 @@ def order():
         return render_template('order.html', rows=rows)
 
     # return render_template('order.html')
-    return go_to_login
+    return GO_TO_LOGIN
 
 
 if __name__ == '__main__':

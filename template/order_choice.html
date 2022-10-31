@@ -1,0 +1,28 @@
+<html lang="ru">
+<head>
+    <meta charset="utf-8">
+    <title>Week</title>
+    {#    <link href="../static/css/week.css" rel="stylesheet" type="text/css">#}
+    <link href="../static/css/order_choice.css" rel="stylesheet" type="text/css">
+    <meta http-equiv="Cache-Control" content="no-cache">
+
+</head>
+
+<select autofocus class="active" onchange="top.location=this.value">
+    <option value="/order_choice">---</option>
+    <option value="/order_choice" class="week_title">№Н : Пн Вт Ср Чт Пт Сб Вс</option>
+    {% for item in week_list %}
+        {% if item==current_week %}
+            <option id='current_week' value="/week/{{ item }}">
+                {{ item }} : {{ days[item] }}
+            </option>
+        {% else %}
+            <option value="/week/{{ item }}">{{ item }} : {{ days[item] }}</option>
+        {% endif %}
+    {% endfor %}
+</select>
+
+<script type="text/javascript" charset="utf8" src="/static/js/jquery-3.5.1.min.js"></script>
+<script type="text/javascript" charset="utf8" src="/static/js/week.js"></script>
+
+</html>

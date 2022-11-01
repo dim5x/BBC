@@ -1,3 +1,4 @@
+//Ajax запрос при нажатии кнопки Заказать
 $(document).on("click", "#send", function () {
     // var param = $(".bbc_link").val();
     let link = $(this).attr('value');
@@ -25,7 +26,7 @@ $(document).on("click", "#send", function () {
     return false;
 })
 
-
+//Поиск в таблице по нажатию на тэг.
 $(document).on("click", ".tag", function () {
     let genre = $(this).attr('value');
     let table = $('#state').DataTable();

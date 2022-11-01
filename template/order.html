@@ -3,8 +3,7 @@
     <meta charset="utf-8">
     <title>Заказ</title>
     <link href="../static/css/order.css" rel="stylesheet" type="text/css">
-    {#    <link href="../static/css/week.css" rel="stylesheet" type="text/css">#}
-    {#    <meta http-equiv="Cache-Control" content="no-cache">#}
+    <meta http-equiv="Cache-Control" content="no-cache">
 
 </head>
 
@@ -13,14 +12,7 @@
     <li><a class="active" href="/order_choice">Заказ</a></li>
     <li style="float:right"><a href="#about">Об.</a></li>
 </ul>
-{#<div class="centered">#}
-{#    <form id="form">#}
-{#        <label for="week">What week would you like to start?</label><br>#}
-{#        <input id="weekpicker" type="week" name="week" min="2022-W36" max="2022-W52"/>#}
-{##}
-{#        <button id="ok"> Ок</button>#}
-{#    </form>#}
-{#</div>#}
+
 <div class="basediv2">
     <table id="state">
         <thead>
@@ -48,7 +40,6 @@
                 {#summary#}
                 <td>{{ item.medium_synopsis }} </td>
                 {#duration#}
-                {#            {{ str(datetime.timedelta(seconds=item[8])) }}#}
                 <td data-sort={{ item.duration }}>
                     {#                    <span style="display: none;">{{ item[8] |int }} </span>#}
                     {{ convert(item.duration) }}
@@ -58,7 +49,7 @@
                 <td class="td_genre">
                     {% for item in item.genre %}
                         <a href="#" class="tag" value="{{ item }}">
-                           #{{ item }}<br>
+                            #{{ item }}<br>
                         </a>
                     {% endfor %}
                 </td>

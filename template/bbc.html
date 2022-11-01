@@ -3,7 +3,7 @@
     <meta charset="utf-8">
     <title>BBC downloader</title>
     <link href="../static/css/bbc.css" rel="stylesheet" type="text/css">
-    {#    <meta http-equiv="Cache-Control" content="no-cache">#}
+    <meta http-equiv="Cache-Control" content="no-cache">
 
     <ul>
         <li><a class="active" href="/bbc">Файлы</a></li>
@@ -52,7 +52,7 @@
             <tr>
                 <td><a href="{{ item.link }}" download> {{ item.name }}</a></td>
                 <td>{{ item.size }}</td>
-{#                <td><span style="display: none;">{{ item.timestamp }}</span>{{ item.date }}</td>#}
+                {#                <td><span style="display: none;">{{ item.timestamp }}</span>{{ item.date }}</td>#}
                 <td data-sort={{ item.timestamp }}>{{ item.date }}</td>
                 <form method="post">
                     <td class="last_td">

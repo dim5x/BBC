@@ -7,6 +7,7 @@ import time
 from flask import Flask, render_template, request, redirect, flash, session
 from flask_cors import CORS
 
+import psycopg2
 import yadisk
 
 app = Flask(__name__)
@@ -16,6 +17,11 @@ CORS(app, supports_credentials=True)
 
 TOKEN = os.environ['TOKEN_BBC']
 PASSWORD_HASH = os.environ['PASSWORD_HASH']
+
+DATABASE_URL = os.environ['DATABASE_URL']
+
+
+# conn = psycopg2.connect(DATABASE_URL, sslmode='require')
 
 y = yadisk.YaDisk(token=TOKEN)
 login: str = ''
@@ -152,15 +158,23 @@ def order_choice():
     if login in session:
         current_week = int(datetime.today().strftime("%U"))
 
-        sqlite_connection = sqlite3.connect('Gbase.sqlite')
-        cursor = sqlite_connection.cursor()
+        # sqlite_connection = sqlite3.connect('Gbase.sqlite')
+        # cursor = sqlite_connection.cursor()
+        # sqlite_select_query = "SELECT DISTINCT week_number FROM article"
+        # cursor.execute(sqlite_select_query)
+
+        # postgres_connection = psycopg2.connect(dbname='postgres', user='postgres',
+        #                                        password='Poiq701384', host='localhost')
+        heroku_connection = psycopg2.connect(DATABASE_URL, sslmode='require')
+        cursor = heroku_connection.cursor()
         sqlite_select_query = "SELECT DISTINCT week_number FROM article"
         cursor.execute(sqlite_select_query)
+
         l = cursor.fetchall()
         # print(l)
 
         week_list = sorted([i[0] for i in l])
-        print(week_list)
+        # print(week_list)
 
         days = {i: ' '.join(weeknum_to_dates(i)) for i in week_list}
 
@@ -173,12 +187,19 @@ def order(week_id):
     global login
     rows = []
     if login in session:
-        sqlite_connection = sqlite3.connect('Gbase.sqlite')
-        cursor = sqlite_connection.cursor()
-
-        sqlite_select_query = "SELECT * FROM article WHERE week_number=? ORDER BY title, subtitle"
+        # sqlite_connection = sqlite3.connect('Gbase.sqlite')
+        # cursor = sqlite_connection.cursor()
+        # sqlite_select_query = "SELECT * FROM article WHERE week_number=? ORDER BY title, subtitle"
+        # cursor.execute(sqlite_select_query, (week_id,))
+        # postgres_connection = psycopg2.connect(dbname='postgres',
+        #                                        user='postgres',
+        #                                        password='Poiq701384',
+        #                                        host='localhost')
+        # cursor = postgres_connection.cursor()
+        heroku_connection = psycopg2.connect(DATABASE_URL, sslmode='require')
+        cursor = heroku_connection.cursor()
+        sqlite_select_query = "SELECT * FROM article WHERE week_number=%s ORDER BY title, subtitle"
         cursor.execute(sqlite_select_query, (week_id,))
-
         for row in cursor.fetchall():
             d = {'title': row[0],
                  'subtitle': row[1],
@@ -201,18 +222,21 @@ def order(week_id):
                  'downloaded': row[18],
                  }
             rows.append(d)
-            print(rows[0]['genre'])
+            # print(rows[0]['genre'])
         if request.method == 'POST':
 
             print('form', request.form)
             link = request.form.get('link')
             print('link=', link)
 
-            sqlite_update_query = """UPDATE article SET downloaded = ? where url_id = ?"""
+            sqlite_update_query = """UPDATE article SET downloaded = %s where url_id = %s"""
             value = (1, link)
             cursor.execute(sqlite_update_query, value)
-            sqlite_connection.commit()
-            sqlite_connection.close()
+            # sqlite_connection.commit()
+            # sqlite_connection.close()
+            # postgres_connection.commit()
+            heroku_connection.commit()
+            # postgres_connection.close()
 
             filename = f"{time.strftime('%H%M%S')}.txt"
             with open(filename, 'w') as f:

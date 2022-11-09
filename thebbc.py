@@ -18,7 +18,7 @@ CORS(app, supports_credentials=True)
 TOKEN = os.environ['TOKEN_BBC']
 PASSWORD_HASH = os.environ['PASSWORD_HASH']
 
-# DATABASE_URL = os.environ['DATABASE_URL']
+DATABASE_URL = os.environ['DATABASE_URL']
 
 y = yadisk.YaDisk(token=TOKEN)
 login: str = ''
@@ -161,13 +161,13 @@ def order_choice():
         # cursor = sqlite_connection.cursor()
 
         # Local Postgres
-        postgres_connection = psycopg2.connect(dbname='postgres', user='postgres',
-                                               password='Poiq701384', host='localhost')
-        cursor = postgres_connection.cursor()
+        # postgres_connection = psycopg2.connect(dbname='postgres', user='postgres',
+        #                                        password='Poiq701384', host='localhost')
+        # cursor = postgres_connection.cursor()
 
         # HEROKU
-        # heroku_connection = psycopg2.connect(DATABASE_URL, sslmode='require')
-        # cursor = heroku_connection.cursor()
+        heroku_connection = psycopg2.connect(DATABASE_URL, sslmode='require')
+        cursor = heroku_connection.cursor()
 
         sql = "SELECT DISTINCT week_number FROM article"
         cursor.execute(sql)
@@ -197,15 +197,15 @@ def order(week_id):
         # cursor.execute(sqlite_select_query, (week_id,))
 
         # LocalPostgres
-        postgres_connection = psycopg2.connect(dbname='postgres',
-                                               user='postgres',
-                                               password='Poiq701384',
-                                               host='localhost')
-        cursor = postgres_connection.cursor()
+        # postgres_connection = psycopg2.connect(dbname='postgres',
+        #                                        user='postgres',
+        #                                        password='Poiq701384',
+        #                                        host='localhost')
+        # cursor = postgres_connection.cursor()
 
         # Heroku
-        # heroku_connection = psycopg2.connect(DATABASE_URL, sslmode='require')
-        # cursor = heroku_connection.cursor()
+        heroku_connection = psycopg2.connect(DATABASE_URL, sslmode='require')
+        cursor = heroku_connection.cursor()
 
         sqlite_select_query = "SELECT * FROM article WHERE week_number=%s ORDER BY title, subtitle"
         cursor.execute(sqlite_select_query, (week_id,))
@@ -244,8 +244,8 @@ def order(week_id):
             # sqlite_connection.commit()
             # sqlite_connection.close()
             # postgres_connection.commit()
-            # heroku_connection.commit()
-            postgres_connection.close()
+            heroku_connection.commit()
+            # postgres_connection.close()
 
             # filename = f"{time.strftime('%H%M%S')}.txt"
             filename = link + '.txt'

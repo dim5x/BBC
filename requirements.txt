@@ -13,5 +13,5 @@ psycopg2==2.9.5
 requests==2.31.0
 six==1.16.0
 urllib3==1.26.12
-Werkzeug==2.2.3
+Werkzeug==2.3.8
 yadisk==1.2.16

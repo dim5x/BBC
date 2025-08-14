@@ -12,6 +12,6 @@ MarkupSafe==2.1.1
 psycopg2==2.9.5
 requests==2.32.0
 six==1.16.0
-urllib3==1.26.19
+urllib3==2.5.0
 Werkzeug==2.3.8
 yadisk==1.2.16
